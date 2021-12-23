@@ -40,7 +40,7 @@ if (! isset($argv[2])) {
 $onlyEchoPercentage = isset($argv[3]) && $argv[3] === '--only-percentage';
 
 $inputFile = $argv[1];
-$percentage = min(100, max(0, (float) $argv[2]));
+$percentage = min(100, max(0, round((float) $argv[2]), 2));
 
 $elements = 0;
 $coveredElements = 0;
@@ -66,8 +66,7 @@ if ($totalMetrics === 0) {
     printStatus('Insufficient data for calculation. Please add more code.', STATUS_ERROR);
 }
 
-$totalPercentageCoverage = $coveredMetrics / $totalMetrics * 100;
-
+$totalPercentageCoverage = round($coveredMetrics / $totalMetrics * 100, 2);
 if ($totalPercentageCoverage < $percentage && ! $onlyEchoPercentage) {
     printStatus(
         'Total code coverage is '.formatCoverage($totalPercentageCoverage).' which is below the accepted '.$percentage.'%',
