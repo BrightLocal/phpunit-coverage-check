@@ -10,7 +10,7 @@ const STATUS_ERROR = 1;
 
 function formatCoverage(float $number): string
 {
-    return sprintf('%0.2f %%', $number);
+    return sprintf('%0.5f %%', $number);
 }
 
 function loadMetrics(string $file): array
