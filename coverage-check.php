@@ -67,7 +67,8 @@ if ($totalMetrics === 0) {
 }
 
 $totalPercentageCoverage = round($coveredMetrics / $totalMetrics * 100, 5);
-if ($totalPercentageCoverage < $percentage && ! $onlyEchoPercentage) {
+// comparison with some level of tolerance
+if (($percentage - $totalPercentageCoverage) > 0.005 && ! $onlyEchoPercentage) {
     printStatus(
         "\e[1;37;41m Total code coverage is ".formatCoverage($totalPercentageCoverage).' which is below the accepted '.$percentage."% \e[0m",
         STATUS_ERROR
